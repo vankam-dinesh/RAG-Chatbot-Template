@@ -1,0 +1,30 @@
+services:
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+    environment:
+      - OLLAMA_URL=http://host.docker.internal:11434
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./documents:/app/documents
+    user: "${UID:-1000}:${GID:-1000}"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+    ports:
+      - "8505:8505"
+    environment:
+      - BACKEND_URL=http://backend:8000
+      - CHAINLIT_AUTH_SECRET=${CHAINLIT_AUTH_SECRET}
+    volumes:
+      - ./frontend/src:/app/frontend/src
+      - ./frontend/public:/app/frontend/public
+    depends_on:
+      - backend
+    restart: unless-stopped
