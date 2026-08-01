@@ -166,13 +166,3 @@ Read the [Deployment Steps](kubernetes-template/README-kubernetes.md) guide for 
 * Push to the branch (git push origin feature/amazing-feature)
 * Open a Pull Request
 
-## 📝 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-
-## 🙏 Acknowledgments
-
-* Ollama for local LLM support
-* LangChain for RAG implementation
-* Chainlit for the chat interface
-* FastAPI for the backend framework
